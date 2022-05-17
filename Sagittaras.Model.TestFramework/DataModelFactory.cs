@@ -5,7 +5,7 @@ using Castle.Core.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Sagittaras.DataModel.TestFramework
+namespace Sagittaras.Model.TestFramework
 {
     /// <summary>
     /// Factory class for model unit tests

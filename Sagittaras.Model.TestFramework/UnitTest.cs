@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Sagittaras.DataModel.TestFramework
+namespace Sagittaras.Model.TestFramework
 {
     /// <summary>
     /// Implementation of <see cref="IClassFixture{TFixture}" /> into custom default class for unit testing.
