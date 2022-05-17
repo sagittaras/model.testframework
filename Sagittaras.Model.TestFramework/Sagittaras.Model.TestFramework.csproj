@@ -4,6 +4,14 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
         <RootNamespace>Sagittaras.Model.TestFramework</RootNamespace>
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Sagittaras Testing Framework for Model Layer</Title>
+        <Authors>Sagittaras Games</Authors>
+        <Copyright>Sagittaras Games</Copyright>
+        <PackageProjectUrl>https://github.com/sagittaras/model.testframework</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/sagittaras/model.testframework/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/sagittaras/model.testframework</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
