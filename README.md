@@ -1,4 +1,4 @@
-﻿# Model Test Framework by [Sagittaras Games](https://github.com/sagittaras)
+﻿# Sagittaras.Model.TestFramework by [Sagittaras Games](https://github.com/sagittaras)
 Library for creating xUnit tests of Database Layer.
 
 ## Features
