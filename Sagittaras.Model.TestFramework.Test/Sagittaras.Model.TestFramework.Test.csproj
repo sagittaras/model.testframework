@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
-      <UserSecretsId>eb4d1b82-a4ec-4c91-88a4-5d0c2031e586</UserSecretsId>
+      <UserSecretsId>eb4d1b82a4ec4c9188a45d0c2031e586</UserSecretsId>
   </PropertyGroup>
 
     <ItemGroup>
