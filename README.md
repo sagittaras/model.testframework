@@ -13,7 +13,7 @@ Library for creating xUnit tests of Database Layer.
 For the support of parallelism and clean database for every test case, each database should be initialized with unique name. This is done through
 `GetConnectionString(engine)` method, which prepares the connection string with uniquely generated database name.
 
-How the unique connection string is generated is declared by the parameter and enum `Engine`
+How the unique connection string is generated is declared by the parameter and enum `Engine`.
 
 #### Engine.DbEngine
 When we are testing a data model layer we also need a access to the database itself. To ensure unique database credentials
@@ -36,9 +36,16 @@ When using InMemory database the connection string in user secrets is not requir
 Test Factory is a class providing options to configure a service provider used inside of tests. It is needed to create a new
 class extending from `TestFactory` and overrides `OnConfiguring` method.
 
+
 ```csharp
 public class UnitTestFactory : TestFactory 
 {
+    /// <summary>
+    /// By default the connection string name is defined as UnitTest. But we are able
+    /// to change this name simply by overriding the ConnectionString property.
+    /// </summary>
+    protected override string ConnectionString => "Postgre";
+
     /// <summary>
     /// We define our database context with generated connection string and
     /// add any required service. Or modify the available ones.
