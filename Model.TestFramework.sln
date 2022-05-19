@@ -5,7 +5,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B521685-1CCB-4196-BAC6-2F0ED2521D6B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagittaras.Model.TestFramework.Test", "Sagittaras.Model.TestFramework.Test\Sagittaras.Model.TestFramework.Test.csproj", "{AB499D47-D70A-45F2-B39C-1F25E3463320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,5 +20,9 @@ Global
 		{E9ADD3EF-02B0-42D3-9143-72FE6A457C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9ADD3EF-02B0-42D3-9143-72FE6A457C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9ADD3EF-02B0-42D3-9143-72FE6A457C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB499D47-D70A-45F2-B39C-1F25E3463320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB499D47-D70A-45F2-B39C-1F25E3463320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB499D47-D70A-45F2-B39C-1F25E3463320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB499D47-D70A-45F2-B39C-1F25E3463320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

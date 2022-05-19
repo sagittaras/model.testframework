@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using Castle.Core.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 
 namespace Sagittaras.Model.TestFramework
 {
@@ -13,29 +10,31 @@ namespace Sagittaras.Model.TestFramework
     /// <remarks>
     /// Class is preparing testing environment and single database per every test.
     /// </remarks>
-    public class DataModelFactory
+    public class TestFactory
     {
-        /// <summary>
-        /// A name of file containing the default connection string.
-        /// </summary>
-        private const string ConnectionStringFile = "connectionString.txt";
-
         /// <summary>
         /// Collection for building <see cref="IServiceProvider" />
         /// </summary>
         private readonly ServiceCollection _serviceCollection = new();
 
         /// <summary>
+        /// Instance of configuration for the test.
+        /// </summary>
+        private readonly IConfiguration _configuration;
+        
+        /// <summary>
         /// Backing field for <see cref="ServiceProvider" />
         /// </summary>
         private IServiceProvider? _serviceProvider;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="DataModelFactory" /> with configured services.
+        /// Initializes a new instance of <see cref="TestFactory" /> with configured services.
         /// </summary>
-        protected DataModelFactory()
+        protected TestFactory()
         {
-            _serviceCollection.AddSingleton(Mock.Of<IConfiguration>());
+            DatabaseName = Guid.NewGuid().ToString("N");
+            _configuration = ConfigurationFactory.Create(GetType().Assembly);
+            _serviceCollection.AddSingleton(_configuration);
         }
 
         /// <summary>
@@ -60,6 +59,16 @@ namespace Sagittaras.Model.TestFramework
         }
 
         /// <summary>
+        /// Gets the name of connection string inside the configuration.
+        /// </summary>
+        protected virtual string ConnectionString => "UnitTest";
+        
+        /// <summary>
+        /// Databse name as uniquely generated GUID.
+        /// </summary>
+        protected string DatabaseName { get; }
+
+        /// <summary>
         /// Method providing additional way to register custom services.
         /// </summary>
         /// <param name="services">Services collection</param>
@@ -68,23 +77,18 @@ namespace Sagittaras.Model.TestFramework
         }
 
         /// <summary>
-        /// Loads up a default connection string from <see cref="ConnectionStringFile" /> and adds
-        /// randomly generated database name to ensure each test will be running in separate database
-        /// context.
+        /// Creates a connection string with uniquely named database.
         /// </summary>
         /// <returns>Default connection string.</returns>
-        /// <exception cref="DirectoryNotFoundException">Unable to determine current location.</exception>
-        protected static string GetConnectionString()
+        protected string GetConnectionString(Engine engine)
         {
-            string? classLocation = Path.GetDirectoryName(new Uri(typeof(DataModelFactory).Assembly.Location).LocalPath);
-            if (classLocation is null)
+            if (engine == Engine.InMemory)
             {
-                throw new DirectoryNotFoundException($"Could not determine location of {nameof(DataModelFactory)}");
+                return DatabaseName;
             }
-
-            string filePath = Path.Combine(classLocation, ConnectionStringFile);
-            string dbName = $"xunit_{Guid.NewGuid():N}";
-            return $"{File.ReadAllLines(filePath).First()};Database={dbName}";
+            
+            string baseConnectionString = _configuration.GetConnectionString(ConnectionString);
+            return $"{baseConnectionString};Database={DatabaseName}";
         }
     }
 }

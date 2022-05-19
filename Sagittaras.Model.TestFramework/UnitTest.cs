@@ -12,7 +12,7 @@ namespace Sagittaras.Model.TestFramework
     /// Class is using interface <see cref="IAsyncLifetime" />, so every Database test starts from scratch.
     /// </summary>
     public abstract class UnitTest<TFactory, TDbContext> : IClassFixture<TFactory>, IAsyncLifetime
-        where TFactory : DataModelFactory
+        where TFactory : TestFactory
         where TDbContext : DbContext
     {
         /// <summary>
