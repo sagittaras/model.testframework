@@ -9,7 +9,7 @@ namespace Sagittaras.Model.TestFramework.Test.Environment.PostgreSql
 
         protected override void OnConfiguring(ServiceCollection services)
         {
-            services.AddDbContext<MyContext>(options => { options.UseNpgsql(GetConnectionString(Engine.DbEngine)); });
+            services.AddDbContext<TestContext>(options => { options.UseNpgsql(GetConnectionString(Engine.DbEngine)); });
         }
     }
 }

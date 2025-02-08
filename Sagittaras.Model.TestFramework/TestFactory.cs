@@ -5,30 +5,30 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Sagittaras.Model.TestFramework
 {
     /// <summary>
-    /// Factory class for model unit tests
+    ///     Factory class for model unit tests
     /// </summary>
     /// <remarks>
-    /// Class is preparing testing environment and single database per every test.
+    ///     Class is preparing testing environment and single database per every test.
     /// </remarks>
     public class TestFactory
     {
         /// <summary>
-        /// Collection for building <see cref="IServiceProvider" />
+        ///     Collection for building <see cref="IServiceProvider" />
         /// </summary>
-        private readonly ServiceCollection _serviceCollection = new();
+        private readonly ServiceCollection _serviceCollection = [];
 
         /// <summary>
-        /// Instance of configuration for the test.
+        ///     Instance of configuration for the test.
         /// </summary>
         private readonly IConfiguration _configuration;
         
         /// <summary>
-        /// Backing field for <see cref="ServiceProvider" />
+        ///     Backing field for <see cref="ServiceProvider" />
         /// </summary>
         private IServiceProvider? _serviceProvider;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TestFactory" /> with configured services.
+        ///     Initializes a new instance of <see cref="TestFactory" /> with configured services.
         /// </summary>
         protected TestFactory()
         {
@@ -38,11 +38,11 @@ namespace Sagittaras.Model.TestFramework
         }
 
         /// <summary>
-        /// Access to Dependency Container.
+        ///     Access to Dependency Container.
         /// </summary>
         /// <remarks>
-        /// Provider is created on demand. If the provider has no instance yet, configuration and building process
-        /// will be called.
+        ///     Provider is created on demand. If the provider has no instance yet, configuration and building process
+        ///     will be called.
         /// </remarks>
         public IServiceProvider ServiceProvider
         {
@@ -59,17 +59,17 @@ namespace Sagittaras.Model.TestFramework
         }
 
         /// <summary>
-        /// Gets the name of connection string inside the configuration.
+        ///     Gets the name of connection string inside the configuration.
         /// </summary>
         protected virtual string ConnectionString => "UnitTest";
         
         /// <summary>
-        /// Databse name as uniquely generated GUID.
+        ///     Database name as uniquely generated GUID.
         /// </summary>
         protected string DatabaseName { get; }
 
         /// <summary>
-        /// Method providing additional way to register custom services.
+        ///     Method providing additional way to register custom services.
         /// </summary>
         /// <param name="services">Services collection</param>
         protected virtual void OnConfiguring(ServiceCollection services)
@@ -77,7 +77,7 @@ namespace Sagittaras.Model.TestFramework
         }
 
         /// <summary>
-        /// Creates a connection string with uniquely named database.
+        ///     Creates a connection string with uniquely named database.
         /// </summary>
         /// <returns>Default connection string.</returns>
         protected string GetConnectionString(Engine engine)
@@ -87,7 +87,7 @@ namespace Sagittaras.Model.TestFramework
                 return DatabaseName;
             }
             
-            string baseConnectionString = _configuration.GetConnectionString(ConnectionString);
+            string baseConnectionString = _configuration.GetConnectionString(ConnectionString) ?? throw new InvalidOperationException($"Connection string `{ConnectionString}` not found");
             return $"{baseConnectionString};Database={DatabaseName}";
         }
     }

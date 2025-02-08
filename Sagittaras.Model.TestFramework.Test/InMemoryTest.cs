@@ -8,14 +8,10 @@ using Xunit.Abstractions;
 
 namespace Sagittaras.Model.TestFramework.Test
 {
-    public class InMemoryTest : MemoryTest
+    public class InMemoryTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : MemoryTest(factory, testOutputHelper)
     {
-        public InMemoryTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
-        {
-        }
-
         /// <summary>
-        /// We inserts a new person in to database. There should be then exactly two persons.
+        ///     We insert a new person in to database. There should be then exactly two persons.
         /// </summary>
         [Fact]
         public async Task Test_Insert()
@@ -27,7 +23,7 @@ namespace Sagittaras.Model.TestFramework.Test
         }
         
         /// <summary>
-        /// There should be always exactly one person.
+        ///     There should be always exactly one person.
         /// </summary>
         [Fact]
         public async Task Test_TestData()

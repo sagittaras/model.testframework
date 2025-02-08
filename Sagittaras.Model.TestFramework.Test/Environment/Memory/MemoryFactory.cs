@@ -7,7 +7,7 @@ namespace Sagittaras.Model.TestFramework.Test.Environment.Memory
     {
         protected override void OnConfiguring(ServiceCollection services)
         {
-            services.AddDbContext<MyContext>(options =>
+            services.AddDbContext<TestContext>(options =>
             {
                 options.UseInMemoryDatabase(GetConnectionString(Engine.InMemory));
             });

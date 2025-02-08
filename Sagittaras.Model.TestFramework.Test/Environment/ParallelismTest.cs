@@ -7,14 +7,10 @@ using Xunit.Abstractions;
 
 namespace Sagittaras.Model.TestFramework.Test.Environment
 {
-    public class ParallelismTest : MemoryTest
+    public class ParallelismTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : MemoryTest(factory, testOutputHelper)
     {
-        public ParallelismTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
-        {
-        }
-        
         /// <summary>
-        /// We inserts a new person in to database. There should be then exactly two persons.
+        /// We insert a new person in to database. There should be then exactly two persons.
         /// </summary>
         [Fact]
         public async Task Test_Insert()
@@ -35,10 +31,5 @@ namespace Sagittaras.Model.TestFramework.Test.Environment
         }
     }
 
-    public class SecondParallelismTest : ParallelismTest
-    {
-        public SecondParallelismTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
-        {
-        }
-    }
+    public class SecondParallelismTest(MemoryFactory factory, ITestOutputHelper testOutputHelper) : ParallelismTest(factory, testOutputHelper);
 }

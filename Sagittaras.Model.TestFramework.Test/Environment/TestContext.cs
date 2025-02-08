@@ -2,12 +2,8 @@
 
 namespace Sagittaras.Model.TestFramework.Test.Environment
 {
-    public class MyContext : DbContext
+    public class TestContext(DbContextOptions<TestContext> options) : DbContext(options)
     {
-        public MyContext(DbContextOptions<MyContext> options) : base(options)
-        {
-        }
-        
         public DbSet<Person> Persons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

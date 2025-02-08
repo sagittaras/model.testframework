@@ -9,14 +9,10 @@ using Xunit.Abstractions;
 
 namespace Sagittaras.Model.TestFramework.Test
 {
-    public class PostgreSqlTest : PostgreTest
+    public class PostgreSqlTest(PostgreFactory factory, ITestOutputHelper testOutputHelper) : PostgreTest(factory, testOutputHelper)
     {
-        public PostgreSqlTest(PostgreFactory factory, ITestOutputHelper testOutputHelper) : base(factory, testOutputHelper)
-        {
-        }
-        
         /// <summary>
-        /// We inserts a new person in to database. There should be then exactly two persons.
+        /// We insert a new person in to database. There should be then exactly two persons.
         /// </summary>
         [Fact]
         public async Task Test_Insert()
